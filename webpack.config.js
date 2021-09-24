@@ -67,7 +67,9 @@ const jsLoaders = () => {
     }];
 
     if (IS_DEVELOPMENT) {
-        loaders.push('eslint-loader')
+        loaders.push({
+            loader: 'eslint-loader'
+        })
     }
 
     return loaders;
@@ -87,7 +89,7 @@ const getPlugins = () => {
             patterns: [
                 {
                     from: path.resolve(__dirname, 'src/favicon.ico'),
-                    to: path.resolve(__dirname, 'dist')
+                    to: path.resolve(__dirname, 'build')
                 }
             ]
         }),
@@ -112,7 +114,7 @@ module.exports = {
     },
     output: {
         filename: fileName('js'),
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, 'build'),
     },
     resolve: {
         alias: {
@@ -123,7 +125,7 @@ module.exports = {
     },
     optimization: optimize(),
     devServer: {
-        static: './dist',
+        static: './build',
         host: '0.0.0.0',
         port: 4000,
         hot: IS_DEVELOPMENT,
