@@ -2,6 +2,7 @@ import React, {FC, useState} from 'react';
 import {BrowserRouter} from 'react-router-dom';
 import {Layout} from '../layout';
 import {Preloader} from '../common/preloader';
+import {ToolbarPanel} from '../toolbar';
 
 export const App: FC = () => {
     const [loaded, setLoaded] = useState(true);
@@ -12,7 +13,8 @@ export const App: FC = () => {
 
     return (
         <BrowserRouter>
-            <Layout/>
+            <ToolbarPanel isFullToolbar={true} />
+            <Layout loaded={true} />
             <div id="modal-dialog-wrapper"/>
         </BrowserRouter>
     );

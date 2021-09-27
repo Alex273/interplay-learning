@@ -78,7 +78,7 @@ const jsLoaders = () => {
 const getPlugins = () => {
     const plugins = [
         new HTMLWebpackPlugin({
-            template: './index.html',
+            template: './templates/index.html',
             minify: {
                 collapseWhitespace: IS_PRODUCTION,
                 removeComments: IS_PRODUCTION,
@@ -88,7 +88,7 @@ const getPlugins = () => {
         new CopyWebpackPlugin({
             patterns: [
                 {
-                    from: path.resolve(__dirname, 'src/favicon.ico'),
+                    from: path.resolve(__dirname, 'src/assets/favicon.ico'),
                     to: path.resolve(__dirname, 'build')
                 }
             ]
@@ -109,7 +109,7 @@ module.exports = {
     context: path.resolve(__dirname, 'src'),
     mode: 'development',
     entry: {
-        main: ['@babel/polyfill', './index.jsx'],
+        main: ['@babel/polyfill', './index.tsx'],
         analytics: './analytics.ts',
     },
     output: {
@@ -183,6 +183,11 @@ module.exports = {
                         options: getBabelOptions('@babel/preset-react')
                     },
                 ],
+            },
+            {
+                test: /\.tsx?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/,
             },
         ]
     }

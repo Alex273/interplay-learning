@@ -1,8 +1,8 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { Redirect, Route, RouteProps } from 'react-router-dom';
 // import { useAuth } from '../../hooks/useAuth';
 
-import { PATH } from '../../../routing/routes';
+import { PATH } from '../routes';
 
 export const PrivateRoute: FC<RouteProps> = ({ children, path, ...rest }) => {
     // const { loading, isAuthenticated } = useAuth();

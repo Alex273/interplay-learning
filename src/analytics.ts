@@ -23,4 +23,5 @@ function createAnalytics(): object {
     }
 }
 
+// @ts-ignore
 window['analytics'] = createAnalytics();

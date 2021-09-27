@@ -13,6 +13,6 @@ export const Preloader: React.FC<PreloaderProps> = ({isOverlayBg = false, classN
         // >
         //     <div className={classNames(style.preloader__content)} />
         // </div>
-        'Preloader component !!!'
+        <div>Preloader !!!</div>
     );
 };

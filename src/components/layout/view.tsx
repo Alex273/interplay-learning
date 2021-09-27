@@ -1,10 +1,10 @@
 import React, {FC} from 'react';
 import {Route, Switch} from 'react-router-dom';
-import {Dashboard} from '../Dashboard';
-import {Catalog} from '../Catalog';
-import {HelpCenter} from '../HelpCenter';
-import {Team} from '../Team';
-import {PrivateRoute} from '../common/PrivateRoute';
+import {Dashboard} from '../dashboard';
+import {Catalog} from '../catalog';
+import {HelpCenter} from '../help-center';
+import {Team} from '../team';
+import {PrivateRoute} from '../../routing/private-route';
 import { PATH } from '../../routing/routes';
 import {Preloader} from '../common/preloader';
 
@@ -22,18 +22,20 @@ export const View: FC<LayoutProps> = (props: LayoutProps) => {
     return (
         <Switch>
             <Route path={PATH.DASHBOARD}>
-                <Dashboard />
+                <Dashboard loaded={true} />
             </Route>
             <Route path={PATH.CATALOG}>
-                <Catalog />
+                <Catalog loaded={true} />
             </Route>
             <PrivateRoute path={PATH.HELP_CENTER}>
-                <HelpCenter />
+                <HelpCenter loaded={true} />
             </PrivateRoute>
             <PrivateRoute path={PATH.TEAM}>
-                <Team />
+                <Team loaded={true} />
             </PrivateRoute>
+            <Route path={PATH.HOME}>
+                <Dashboard loaded={true} />
+            </Route>
         </Switch>
-
     )
 }
