@@ -67,7 +67,9 @@ const jsLoaders = () => {
     }];
 
     if (IS_DEVELOPMENT) {
-        loaders.push('eslint-loader')
+        loaders.push({
+            loader: 'eslint-loader'
+        })
     }
 
     return loaders;
@@ -76,7 +78,7 @@ const jsLoaders = () => {
 const getPlugins = () => {
     const plugins = [
         new HTMLWebpackPlugin({
-            template: './index.html',
+            template: './templates/index.html',
             minify: {
                 collapseWhitespace: IS_PRODUCTION,
                 removeComments: IS_PRODUCTION,
@@ -86,8 +88,8 @@ const getPlugins = () => {
         new CopyWebpackPlugin({
             patterns: [
                 {
-                    from: path.resolve(__dirname, 'src/favicon.ico'),
-                    to: path.resolve(__dirname, 'dist')
+                    from: path.resolve(__dirname, 'src/assets/favicon.ico'),
+                    to: path.resolve(__dirname, 'build')
                 }
             ]
         }),
@@ -107,12 +109,12 @@ module.exports = {
     context: path.resolve(__dirname, 'src'),
     mode: 'development',
     entry: {
-        main: ['@babel/polyfill', './index.jsx'],
+        main: ['@babel/polyfill', './index.tsx'],
         analytics: './analytics.ts',
     },
     output: {
         filename: fileName('js'),
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, 'build'),
     },
     resolve: {
         alias: {
@@ -123,7 +125,7 @@ module.exports = {
     },
     optimization: optimize(),
     devServer: {
-        static: './dist',
+        static: './build',
         host: '0.0.0.0',
         port: 4000,
         hot: IS_DEVELOPMENT,
@@ -181,6 +183,11 @@ module.exports = {
                         options: getBabelOptions('@babel/preset-react')
                     },
                 ],
+            },
+            {
+                test: /\.tsx?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/,
             },
         ]
     }
